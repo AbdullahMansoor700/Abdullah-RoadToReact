@@ -114,19 +114,21 @@ const Item = ({ item }) => (
 const Search=({search,onSearch})=>{
 console.log("search renders");
   return( 
-    <div>
+    <>
     <label htmlFor='search'> Search </label>
     {/* value is used to display curent value on search */}
     <input id ='search' type='text' value={search} onChange={onSearch}/>
     {/* <p>We are searching for <strong>{props.search}</strong> </p> */}
-    </div>
+    </>
  );
 }
 
+// this is my custom hook, its using a sideeffect and a state (both are hooks)
 const useStoragestate=(key,initialState)=>{
 const[value,setValue]=React.useState(
   localStorage.getItem(key) || initialState
 )
+
 //a side effect refers to the interaction with outside world, we use reacts useeffect state to encounter it
 // useEfeect hook is useed to perform sideeffects
 //the dependancy array basically specify when side eeffect should run
