@@ -122,6 +122,20 @@ console.log("search renders");
     </div>
  );
 }
+
+const useStoragestate=(key,initialState)=>{
+const[value,setValue]=React.useState(
+  localStorage.getItem(key) || initialState
+)
+//a side effect refers to the interaction with outside world, we use reacts useeffect state to encounter it
+// useEfeect hook is useed to perform sideeffects
+//the dependancy array basically specify when side eeffect should run
+  React.useEffect(
+    ()=>{localStorage.setItem(key,value);},[value,key]
+  );
+  return [value,setValue];
+};
+
 //component declared
 const App=()=>{
 console.log("app renders");
@@ -165,17 +179,7 @@ console.log("app renders");
   ];
 
   
-//call back handler concept (but here it is event handler in app component)
-
-  const[searchTerm,setSearchTerm]=React.useState(
-    localStorage.getItem('search') || 'React'
-  )
-  //a side effect refers to the interaction with outside world, we use reacts useeffect state to encounter it
-  // useEfeect hook is useed to perform sideeffects
-  //the dependancy array basically specify when side eeffect should run
-  React.useEffect(
-    ()=>{localStorage.setItem('search',searchTerm)},[searchTerm]
-  )
+const[searchTerm,setSearchTerm]=useStoragestate('search','React');
 
   const handleSearch=(event)=>{
     setSearchTerm(event.target.value);
