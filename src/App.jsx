@@ -109,12 +109,12 @@ const Item = ({ item ,onRemoveItem}) => {
   // }
 
   return(
-   <li>
-      <span> <a href={item.url}>{item.title}</a></span>
-      <span>{item.author}</span>
-      <span>{item.num_comments}</span>
-      <span>{item.points}</span>
-      <span><button type='button' onClick={()=>onRemoveItem(item)}>dismiss</button></span>
+   <li className='item'>
+      <span style={{width : '40%'}}> <a href={item.url}>{item.title}</a></span>
+      <span style={{width: '30'}}>{item.author}</span>
+      <span style={{width : '10%'}}>{item.num_comments}</span>
+      <span style={{width : '10%'}}>{item.points}</span>
+      <span style={{width : '10%'}}><button type='button' onClick={()=>onRemoveItem(item)} className='button button_small'>dismiss</button></span>
   </li>
       
   );
@@ -144,8 +144,8 @@ const InputwithLabel=({id,value,type='text',onInputchange,isFocused,children})=>
 
   return(
   <>
-  <label htmlFor={id}>{children} </label> &nbsp;
-  <input ref={inputRef} id={id} type={type} value={value} onChange={onInputchange}/>
+  <label htmlFor={id} className='label'>{children} </label> &nbsp;
+  <input ref={inputRef} id={id} type={type} value={value} onChange={onInputchange} className='input'/>
   </>
   );
 }
@@ -236,11 +236,11 @@ const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query=';
 
 //component decalred
 const SearchForm=({searchTerm,onSearchInput,onSearchSubmit})=>(
-<form onSubmit={onSearchSubmit}>
+<form onSubmit={onSearchSubmit} className='search-form'>
       <InputwithLabel id="search" value={searchTerm} isFocused onInputchange={onSearchInput} 
       > <strong>Search:</strong></InputwithLabel>
 
-      <button type="submit" disabled={!searchTerm}> Submit </button>
+      <button type="submit" disabled={!searchTerm} className='button button_large'> Submit </button>
       </form>
 );
 
@@ -314,8 +314,8 @@ const handleRemoveStories=(item)=>{
   // );
 
   return(
-    <div>
-      <h1> Hey {getTitle('React')} </h1>
+    <div className='container'>
+      <h1 className='headline-primary'> Hey {getTitle('React')} </h1>
 
     <SearchForm searchTerm={searchTerm} onSearchInput={handleSearchInput} 
     onSearchSubmit={handleSearchSubmit}/>
